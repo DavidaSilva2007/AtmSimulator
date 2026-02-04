@@ -40,6 +40,11 @@ public class AtmSimulator {
     public static void withdraw(int balance) {
     }
 
+    // Prints deposits and withdrawals in transactions list.
+    public static void showTransactionHistory() {
+    }
 
-
+    // Fetches and adds timestamp to transaction history.
+    public static void getTime() {
+    }
 }
