@@ -60,7 +60,6 @@ public class AtmSimulator {
     public static boolean logIn() {
         System.out.print("Please enter your PIN: ");
         int pinInput = scanner.nextInt();
-        newLine();
 
         return pinInput == basePin;
     }
@@ -72,48 +71,48 @@ public class AtmSimulator {
 
     // Allows user to change basePin, while in the program.
     public static void changePin() {
+
+        // Verify current PIN
         while (true) {
             System.out.print("Please enter your current PIN: ");
-            newLine();
 
+            // Throws error message to the user if entered anything other than Int.
             if (!scanner.hasNextInt()) {
-
                 System.out.println("Invalid PIN, please try again.");
+                scanner.nextLine();
                 continue;
             }
 
             int pinInput = scanner.nextInt();
-            scanner.next();
+            scanner.nextLine();
 
+            // Checks if inputPin is NOT the same as basePin
             if (pinInput != basePin) {
-
                 System.out.println("Incorrect PIN, please try again.");
                 continue;
             }
+            break; // Breaks when correct PIN was entered.
+        }
 
-            while (true) {
-                System.out.print("Enter a new PIN: ");
-                newLine();
+        // New PIN entering sequence.
+        while (true) {
+            System.out.print("Enter a new PIN: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("Invalid PIN, please try again.");
+                scanner.nextLine();
+                continue;
+            }
 
-                if (!scanner.hasNextInt()) {
+            int pinChange = scanner.nextInt();
+            scanner.nextLine();
 
-                    System.out.println("Invalid PIN, please try again.");
-                    continue;
-                }
-
-                int pinChange = scanner.nextInt();
-                scanner.next();
-
-                if (pinChange >= 1000 && pinChange <= 9999) {
-                    basePin = pinChange;
-
-                    System.out.println("PIN changed successfully.");
-                    return;
-                } else {
-
-                    System.out.println("PIN must be exactly 4 digits.");
-                    continue;
-                }
+            if (pinChange >= 1000 && pinChange <= 9999) {
+                basePin = pinChange;
+                System.out.println("PIN changed successfully.");
+                return;
+            } else {
+                System.out.println("PIN must be exactly 4 digits.");
+                continue;
             }
         }
     }
